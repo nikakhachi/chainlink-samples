@@ -6,9 +6,15 @@ import "../src/PriceOracle.sol";
 import "forge-std/console.sol";
 
 contract PriceOracleTest is Test {
+    uint256 mainnetFork;
     PriceOracle public priceOracle;
 
+    string MAINNET_RPC_URL = vm.envString("MAINNET_RPC_URL");
+
     function setUp() public {
+        mainnetFork = vm.createFork(MAINNET_RPC_URL);
+
+        vm.selectFork(mainnetFork);
         priceOracle = new PriceOracle();
     }
 
